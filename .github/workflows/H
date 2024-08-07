@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <title>Tägliche Nachrichten</title>
+ <style>
+ .headline {
+ margin-bottom: 20px;
+ }
+ .post {
+ margin-bottom: 20px;
+ }
+ .post h3 {
+ margin: 0;
+ }
+ .post p {
+ margin: 0;
+ }
+ </style>
+ </head>
+ <body>
+ <h1 class="headline">Tägliche Nachrichten</h1>
+ <div class="post">
+ <h3>Post 1</h3>
+ <p>Dies ist der Inhalt von Post 1.</p>
+ </div>
+ <div class="post">
+ <h3>Post 2</h3>
+ <p>Dies ist der Inhalt von Post 2.</p>
+ </div>
+ <div class="post">
+ <h3>Post 3</h3>
+ <p>Dies ist der Inhalt von Post 3.</p>
+ </div>
+ </body>
+</html>
+Nachdem Sie den Code in Ihrem lokalen Repository gespeichert haben, können Sie es mit GitHub synchronisieren, indem Sie die folgenden Befehle ausführen:
+
+$ git init
+$ git add .
+$ git commit -m "Initial commit"
+$ git remote add origin <REMOTE_REPOSITORY_URL>
+$ git push -u origin master
