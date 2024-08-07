@@ -1,5 +1,4 @@
 from flask import Flask, render_template, redirect, url_for, request, flash
-from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'SECRET_KEY'
@@ -7,60 +6,38 @@ app.config['SECRET_KEY'] = 'SECRET_KEY'
 # Datenbankmodels
 # ...
 
-# Nutzerauthentifizierung
-login_manager = LoginManager()
-login_manager.init_app(app)
-
 # Routen
 @app.route('/')
 def home():
     return render_template('home.html')
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        # Nutzerauthentifizierung
-    else:
-        return render_template('login.html')
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
-@app.route('/logout')
-@login_required
-def logout():
-    # Nutzerabmeldung
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
+@app.route('/search', methods=['GET', 'POST'])
+def search():
     if request.method == 'POST':
-        # Neuen Nutzer registrieren
-    else:
-        return render_template('register.html')
+        # Suche in der Datenbank durchführen
+    return render_template('search.html')
 
 # API-Endpunkte für Nachrichten
-@app.route('/api/messages', methods=['GET', 'POST'])
-@login_required
-def api_messages():
-    if request.method == 'POST':
-        # Nachricht speichern
+@app.route('/api/content', methods=['GET', 'POST'])
+def api_content():
+    if request.method == 'GET':
+        # Inhalte abrufen
     else:
-        # Nachrichten abrufen
+        # Inhalte speichern
 
-@app.route('/api/messages/<string:id>', methods=['PUT', 'DELETE'])
-@login_required
-def api_message(id):
-    if request.method == 'PUT':
-        # Nachricht bearbeiten
-    elif request.method == 'DELETE':
-        # Nachricht löschen
-    
+@app.route('/api/content/<string:id>', methods=['PUT', 'DELETE'])
+def api_content(id):
+    if request.method in ['PUT', 'DELETE']:
+        # Inhalte bearbeiten oder löschen
+
 # Routing für das Frontend
 @app.route('/<path:path>')
 def falls_nicht_gefunden(path):
     return render_template('fehler.html')
-
-# Nutzerauthentifizierung
-@login_manager.user_loader
-def load_user(user_id):
-    # Nutzer aus Datenbank laden
 
 if __name__ == '__main__':
     app.run(debug=True)
@@ -72,7 +49,7 @@ Dann können wir eine einfache HTML- und CSS-Struktur für die Nutzeroberfläche
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nachrichtenseite</title>
+    <title>Inhaltsseite</title>
     <link rel="stylesheet" href="static/css/main.css">
 </head>
 <body>
@@ -80,8 +57,8 @@ Dann können wir eine einfache HTML- und CSS-Struktur für die Nutzeroberfläche
         <nav>
             <ul>
                 <li><a href="/">Heim</a></li>
-                <li><a href="/login">Anmelden</a></li>
-                <li><a href="/register">Registrieren</a></li>
+                <li><a href="/about">Über uns</a></li>
+                <li><a href="/search">Suche</a></li>
             </ul>
         </nav>
     </header>
