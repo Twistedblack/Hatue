@@ -1,42 +1,96 @@
-<!DOCTYPE html>
-<html>
- <head>
- <title>Tägliche Nachrichten</title>
- <style>
- .headline {
- margin-bottom: 20px;
- }
- .post {
- margin-bottom: 20px;
- }
- .post h3 {
- margin: 0;
- }
- .post p {
- margin: 0;
- }
- </style>
- </head>
- <body>
- <h1 class="headline">Tägliche Nachrichten</h1>
- <div class="post">
- <h3>Post 1</h3>
- <p>Dies ist der Inhalt von Post 1.</p>
- </div>
- <div class="post">
- <h3>Post 2</h3>
- <p>Dies ist der Inhalt von Post 2.</p>
- </div>
- <div class="post">
- <h3>Post 3</h3>
- <p>Dies ist der Inhalt von Post 3.</p>
- </div>
- </body>
-</html>
-Nachdem Sie den Code in Ihrem lokalen Repository gespeichert haben, können Sie es mit GitHub synchronisieren, indem Sie die folgenden Befehle ausführen:
+from flask import Flask, render_template, redirect, url_for, request, flash
+from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 
-$ git init
-$ git add .
-$ git commit -m "Initial commit"
-$ git remote add origin <REMOTE_REPOSITORY_URL>
-$ git push -u origin master
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'SECRET_KEY'
+
+# Datenbankmodels
+# ...
+
+# Nutzerauthentifizierung
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+# Routen
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        # Nutzerauthentifizierung
+    else:
+        return render_template('login.html')
+
+@app.route('/logout')
+@login_required
+def logout():
+    # Nutzerabmeldung
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        # Neuen Nutzer registrieren
+    else:
+        return render_template('register.html')
+
+# API-Endpunkte für Nachrichten
+@app.route('/api/messages', methods=['GET', 'POST'])
+@login_required
+def api_messages():
+    if request.method == 'POST':
+        # Nachricht speichern
+    else:
+        # Nachrichten abrufen
+
+@app.route('/api/messages/<string:id>', methods=['PUT', 'DELETE'])
+@login_required
+def api_message(id):
+    if request.method == 'PUT':
+        # Nachricht bearbeiten
+    elif request.method == 'DELETE':
+        # Nachricht löschen
+    
+# Routing für das Frontend
+@app.route('/<path:path>')
+def falls_nicht_gefunden(path):
+    return render_template('fehler.html')
+
+# Nutzerauthentifizierung
+@login_manager.user_loader
+def load_user(user_id):
+    # Nutzer aus Datenbank laden
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+Dann können wir eine einfache HTML- und CSS-Struktur für die Nutzeroberfläche erstellen:
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nachrichtenseite</title>
+    <link rel="stylesheet" href="static/css/main.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Heim</a></li>
+                <li><a href="/login">Anmelden</a></li>
+                <li><a href="/register">Registrieren</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- Inhalt -->
+    </main>
+    <footer>
+        <!-- Footer -->
+    </footer>
+    <script src="static/js/main.js"></script>
+</body>
+</html>
